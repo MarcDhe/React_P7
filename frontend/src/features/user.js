@@ -1,6 +1,6 @@
 import produce from 'immer';
 
-const initialState = {
+let initialState = {
   id: null,
   username: null,
   avatar: null,
@@ -8,6 +8,10 @@ const initialState = {
   power: null,
   token: null,
 };
+
+if (localStorage.user !== undefined){ // RECUPERATION DU LOCALSTORAGE POUR LE STATE INITIALE
+  initialState = JSON.parse(localStorage.getItem('user'));
+}
 
 const FETCHING = 'user/fetching';
 const EXPIRED = 'user/expired';
@@ -30,7 +34,7 @@ export default function userReducer(state = initialState, action){
     }))
   }
   if(action.type === EXPIRED){
-    return produce(state, (draft =>{
+    return produce(state, (draft =>{ // ATTENTION DANS LE CAS OU INITIALESTATE ETAIT INIT DANS LE LOCALSTORAGE
       draft = initialState; // REINITIALISATION DU STATE A SA VALEUR INITIALE
     }))
   }

@@ -7,6 +7,16 @@ function setLocalStorage(user){
   localStorage.setItem('user', JSON.stringify(user));
 }
 
-
+function checkLocalStorage(){
+  if(localStorage.user === undefined){
+    // return this.$router.push(`/login`);
+   }
+   this.user = JSON.parse(localStorage.getItem('user'));
+   const now = new Date();
+   if(now.getTime() > this.user.expiry){ // ALORS SESSION EXPIRE
+     localStorage.clear()
+    //  return this.$router.push('/login');
+   }
+}
 //CHECK LOCALSTORAGE: EMPTY OR NOT 
 export {setLocalStorage };
