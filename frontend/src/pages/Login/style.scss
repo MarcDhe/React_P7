@@ -1,0 +1,57 @@
+#login{
+  height: 100vh;
+  background-image: url("../../assets/societe.webp");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+ .login{
+  background-color: #3F4257;
+  border-radius: 10px; 
+  width: 70%;
+  height: 300px;
+  margin-top:5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+    h1{
+      color: white;
+    }
+    .signup-link{
+     text-decoration: none;
+     color: white;
+     strong{
+       color:#FD2D00;
+       &:hover{
+        color: darken($color: #FD2D00, $amount: 10%);
+      }
+     }
+    }
+    button{
+      border-radius: 5px;
+      padding: 5px;
+      background-color: #ba2808;
+      color: white;
+      font-weight: 600;
+      &:hover{
+       background-color: darken($color: #FD2D00, $amount: 10%);
+      }
+    }
+ }
+ form{
+   display: flex;
+   flex-direction: column;
+   width: 60%;
+   input{
+     background-color: white;
+    margin-bottom: 10px;
+    padding:5px;
+    border-radius:5px;
+    border: 0px
+   }
+ }
+   .red-text{
+    color: red;
+  }
+}

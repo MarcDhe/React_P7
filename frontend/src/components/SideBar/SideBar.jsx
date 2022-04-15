@@ -1,33 +1,37 @@
 import './style.scss';
 import { Link } from 'react-router-dom';
+//UTILISATION FONT AWESOME https://www.digitalocean.com/community/tutorials/how-to-use-font-awesome-5-with-react-fr
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUser, faHouseChimneyWindow, faEnvelope, } from '@fortawesome/free-solid-svg-icons'
+
 
 function SideBar() {
   return (
     <div>
       <nav id='nav__inside'>
-        <Link class="nav__link mobile-off" to="/">
-          <h2><i class="fa-solid fa-house-chimney-window"></i> Accueil</h2>
+        <Link className="nav__link mobile-off" to="/">
+          <h2><FontAwesomeIcon icon={faHouseChimneyWindow} /> Home</h2>
         </Link> 
-        <Link class="nav__link mobile-on" to="/">
-          <i class="h2-style fa-solid fa-house-chimney-window"></i>
+        <Link className="nav__link mobile-on" to="/">
+          <FontAwesomeIcon icon={faHouseChimneyWindow} />
         </Link> 
-        <Link class="nav__link mobile-off" to='/messaging'>
-          <h2><i class="fa-solid fa-envelope"></i> Message</h2>
+        <Link className="nav__link mobile-off" to='/messaging'>
+          <h2><FontAwesomeIcon icon={faEnvelope} /> Message</h2>
         </Link>
-        <Link class="nav__link mobile-on" to='/messaging'>
-          <i class="h2-style fa-solid fa-envelope"></i>
+        <Link className="nav__link mobile-on" to='/messaging'>
+          <FontAwesomeIcon icon={faEnvelope} />
         </Link>
-        <Link  class="nav__link mobile-off" to="/profil">
-          <h2><i class="fa-solid fa-user"></i> Profil</h2>
+        <Link  className="nav__link mobile-off" to="/profil">
+          <h2><FontAwesomeIcon icon={faUser} /> Profile</h2>
         </Link> 
-        <Link  class="nav__link mobile-on" to="/profil">
-          <i class="h2-style fa-solid fa-user"></i>
+        <Link  className="nav__link mobile-on" to="/profil">
+          <FontAwesomeIcon icon={faUser} />
         </Link> 
-        <Link class='make_post mobile-off' to='/createPost'>
-          <h2>Poster</h2>
+        <Link className='make_post mobile-off' to='/createPost'>
+          <h2>Post</h2>
         </Link>      
-        <Link  class='make_post mobile-on' to='/createPost'>
-          <h2>Poster</h2>
+        <Link  className='make_post mobile-on' to='/createPost'>
+          <h2>Post</h2>
         </Link>
       </nav>
     </div>

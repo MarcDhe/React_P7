@@ -1,0 +1,39 @@
+.main-body{
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: 50px 1.5fr 1.2fr 0.8fr;
+  grid-template-areas: 
+    "nav nav nav nav"
+    "sidebar main main main"
+    "sidebar main main main"
+    "sidebar main main main";
+  grid-gap: 0.3rem;
+  align-self: center;
+  text-align: center;
+}
+
+
+.navbar{
+  background-color:aqua;
+  grid-area: nav;
+}
+.main-content{
+  grid-area: main;
+}
+.sidebar{
+  grid-area: sidebar;
+}
+
+
+@media screen and (max-width : 767px) {
+  .main-body{
+    grid-template-areas: 
+      "nav"
+      "sidebar"
+      "main "
+      "main";
+    grid-template-columns: 1fr;
+    grid-auto-rows: 50px 0.1fr 1fr 1fr;
+  }
+}
