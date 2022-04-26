@@ -42,7 +42,7 @@
     .unlink{
       text-decoration: none;
       color:#3F4156;
-      cursor:text;
+      cursor: pointer;
     }
     .input-post{
       text-align: start;
@@ -54,6 +54,7 @@
       background-color: white;
       border-top: 1px solid #d2d2d2;
       text-indent:5px; // déplacer le text dans un padding
+      cursor: text;
     }
     
   }

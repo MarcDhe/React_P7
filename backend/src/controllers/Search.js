@@ -1,5 +1,6 @@
 const sequelize = require("../database/connection");
 const { QueryTypes } = require('@sequelize/core'); // BESOIN D'INSTALLER npm i @sequelize/core , résout aussi le problème de double tableau envoyé 
+const User = require('../models/User');
 
 exports.searchSomething = async (req, res, next ) => {
   let allResult = []
@@ -40,4 +41,18 @@ exports.searchSomething = async (req, res, next ) => {
   })
   .catch((error) => res.status(400).json({ error }))
     return res.status(200).json(allResult)
+  }
+
+
+  exports.searchUserId = (req, res, next ) => {
+    console.log(req.body.user_id)
+    User.findOne({where:{id : req.body.user_id}})
+    .then((user) => {
+      if(!user){
+        return res.status(404).json({ error: "Utilisateur inexistant !"});
+      };
+      userDetails={id: user.id, username: user.username, avatar: user.avatar}
+      res.status(200).json(userDetails)
+    })
+    .catch((error)=> res.status(400).json({ error }))
   }

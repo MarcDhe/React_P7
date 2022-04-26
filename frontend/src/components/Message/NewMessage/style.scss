@@ -1,0 +1,79 @@
+#create-message{
+  .border-bottom{
+    padding-bottom:2px;
+    border-bottom: 2px solid red;
+    margin:10px 5px 10px 5px;
+
+  }
+  .message{
+    background-color: rgba(245, 245, 245, 0.8);
+    border:1px solid rgb(210, 210, 210);
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    &__content{
+      border:1px solid rgb(210, 210, 210);
+      min-height: 70px;
+      padding: 5px;
+      margin-top:5px;
+      resize: vertical;
+    }
+    form{
+      display: flex;
+      flex-direction: column;
+    }
+    &__to{
+     border:1px solid rgb(210, 210, 210);
+      margin-top: 5px;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    &__option{
+      margin: 5px;
+    }
+    &__alert{
+      padding: 5px;
+    }
+    .red-alert{
+      background-color: #F8D6D9;
+    }
+    .green-alert{
+      background-color: #D4ECD9;
+    }
+    .found{
+      background-color: white;
+      border:1px solid rgb(210, 210, 210);
+      border-top:none;
+      position: relative;
+      width: auto;
+      max-height: 80px;
+      overflow: scroll;
+      top: -2px;
+      &__user{
+        border-top:1px solid rgb(210, 210, 210);
+        margin: 0px;
+        padding-left: 5px;
+        text-align: start;
+        &:hover{
+          background-color: #EEEEEE;
+          cursor: pointer;
+        }
+      }
+    }
+
+  }
+    button{
+      background-color: #ba2808;
+      color: white;
+      border-radius: 15px;
+      padding: 3px 10px 5px 10px;
+      cursor: pointer;
+      
+      &:hover{
+       background-color: darken($color: #FD2D00, $amount: 10%);
+      }
+    }
+
+}

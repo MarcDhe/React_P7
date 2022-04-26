@@ -21,10 +21,10 @@ function SideBar() {
         <Link className="nav__link mobile-on" to='/messaging'>
           <FontAwesomeIcon icon={faEnvelope} />
         </Link>
-        <Link  className="nav__link mobile-off" to="/profil">
+        <Link  className="nav__link mobile-off" to="/profile/activity">
           <h2><FontAwesomeIcon icon={faUser} /> Profile</h2>
         </Link> 
-        <Link  className="nav__link mobile-on" to="/profil">
+        <Link  className="nav__link mobile-on" to="/profile/activity">
           <FontAwesomeIcon icon={faUser} />
         </Link> 
         <Link className='make_post mobile-off' to='/createPost'>

@@ -1,0 +1,71 @@
+#profile{
+  .banner{
+    height: 100px;
+    background-image: url('../../assets/societe.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .user{
+    display: flex;
+    align-items: center;
+    background-color: aliceblue;
+    figure{
+      margin: 0;
+    }
+    &__avatar{
+      height: 100px;
+      width: 100px;
+      border-radius: 70px;
+      margin-top: -60px;
+      margin-left: 20px;
+      object-fit: cover;
+    }
+    &__details{
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      .username{
+        margin-left:10px;
+        margin-top: -40px;
+      }
+      .create-at{
+        padding-left: 10px;
+        margin-top: -10px;
+      }
+    }
+  }
+  .container{
+    padding: 10px 10px 30px 10px;
+    background-color: #EDF2F6;
+  }
+  .row-icon{
+    background-color: white;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    .activity, .edit, .message{
+      padding:5px;
+      border-right: 1px solid #EDF2F6;
+      width: 15%;
+      &:hover{
+        cursor: pointer;
+        border-bottom: 2px solid #FD2D00;
+      }
+    }
+    .activity:hover .red-color, .edit:hover .red-color, .message:hover .red-color{
+      color: #FD2D00;
+    }
+    p{
+      margin: 0;
+    }
+  }
+  .border-bottom{ 
+    border-bottom: 2px solid #FD2D00;
+    .red-color{ // uniquement si border-bottom est attribué
+      color: #FD2D00;
+    }
+  };
+  
+}

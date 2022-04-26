@@ -1,0 +1,36 @@
+#messaging{
+  height: 100%;
+  overflow: scroll;
+  overflow-wrap: break-word;
+  background-image: url("../../assets/icon.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  h1{
+    margin:0px;
+    background-color: white;
+  }
+  .border-bottom{
+    border-bottom: 2px solid #FD2D00;
+  }
+  p{
+    margin:0; 
+  }
+  .button-propriety{
+    display: flex;
+    justify-content: end;
+    margin-top:5px;
+    padding-bottom: 5px;
+
+    button{
+      background-color: #ba2808;
+      color: white;
+      border-radius: 15px;
+      padding: 3px 10px 5px 10px;
+      cursor: pointer;
+      
+      &:hover{
+       background-color: darken($color: #FD2D00, $amount: 10%);
+      }
+    }
+  }
+}

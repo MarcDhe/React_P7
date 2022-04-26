@@ -1,0 +1,81 @@
+#activity{
+  display: flex;
+  flex-direction: column;
+  h2{
+    margin:0px;
+  }
+  p{
+    margin:0px;
+  }
+    .menu{
+      display: flex;
+      align-items: center;
+      background-color:white;
+      p{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 30px;
+        margin: 0;
+        &:hover{
+          border-bottom: 2px solid #FD2D00;
+          cursor: pointer;
+        }
+      }
+      .border{
+        border-right: 1px solid #EDF2F6;
+      }
+    }
+  
+  .post, .comment{
+    border:1px solid rgb(210, 210, 210);
+    border-radius: 5px;
+    background-color: white;
+    margin-top:10px;
+    padding: 5px;
+    &__info{
+      border-radius: 5px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 5px;
+      .align-start{
+        text-align: start;
+      }
+    }
+    &__release{
+        color:#3F4156;
+    }
+
+    &__body{
+      border:1px solid rgb(210, 210, 210);
+      border-radius: 5px;
+      min-height: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    &__content{
+      width: 100%;
+      padding-left: 10px;
+      text-align: start;
+      margin-bottom:15px;
+    }
+    &__picture{
+      max-width: 100%;
+    }
+    }
+    .default-message{
+      margin-top:10px;
+      margin-bottom: 10px;
+    }
+    .unlink{
+      text-decoration: none;
+      color: black
+    }
+    .red-color{
+      color: #FD2D00;
+    }
+}

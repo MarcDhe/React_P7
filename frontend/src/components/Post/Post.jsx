@@ -27,7 +27,7 @@ function Post(props, {children}){ // VOIR SI CHILDREN FONCTIONNE BIEN COMME <SLO
           }
           <p>{ props.post.content }</p>
         </div>
-        <div>{children}</div>
+         <div>{props.children}</div> {/*pour l'ajout d'un contenu dont on ne sait rien */}
       </Link>
     </article>
   );

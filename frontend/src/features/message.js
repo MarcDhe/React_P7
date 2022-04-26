@@ -1,20 +1,16 @@
 import produce from 'immer';
 
-const initialState =  {
-  status: "void",
-  data: null,
-  error: null,
-} ;
+const initialState =  {} ;
 
-const FETCHING = 'allPost/fetching';
-const RESOLVED = 'allPost/resolved';
-const REJECTED = 'allPost/rejected';
+const FETCHING = 'message/fetching';
+const RESOLVED = 'message/resolved';
+const REJECTED = 'message/rejected';
 
-export const allPostFetching = () => ({ type: FETCHING});
-export const allPostResolved = (data) => ({ type: RESOLVED, payload: data});
-export const allPostRejected = (error) => ({ type: REJECTED, payload: error})
+export const messageFetching = () => ({ type: FETCHING});
+export const messageResolved = (data) => ({ type: RESOLVED, payload: data});
+export const messageRejected = (error) => ({ type: REJECTED, payload: error})
 
-export default function allPostReducer (state = initialState, action){
+export default function messageReducer (state = initialState, action){
   return produce(state, (draft) =>{
     switch(action.type){
       case FETCHING: {
