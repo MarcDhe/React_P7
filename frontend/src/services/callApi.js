@@ -170,9 +170,10 @@ export async function getOnePost(post_id){
     return response.data;
   }catch(err){
     console.log(err);
-    return err
+    return err.response.data;
   }
 }
+
 
 // RECUPERATION DE TOUT LES POSTS DE L'UTILISATEUR
 export async function myPosts(){
@@ -219,6 +220,33 @@ export async function  newPost(body){
   }
 }
 
+export async function updatePost(body, post_id){
+  const auth = authHeader();
+  const config = {
+    headers : auth ,
+  };
+  try{
+    const response = await axios.post(`http://localhost:3000/api/post/${this.post_id}`,body, config);
+    return response.data;
+  }catch(err){
+    console.log(err)
+    return err.response.data;
+  }
+}
+
+export async function deletePost(post_id){
+  const auth = authHeader();
+  const config = {
+    headers : auth ,
+  };
+  try{
+    const response = await axios.delete(`http://localhost:3000/api/post/${post_id}`, config);
+    return response.data;
+  }catch(err){
+    console.log(err)
+    return err.response.data;
+  }
+}
   //*************//
 // COMMENT ROUTE  // 
  //*************//
@@ -231,8 +259,22 @@ export async function newComment(post_id, content){
   };
   const body = {content}
   try{
-    await axios.post(`http://localhost:3000/api/comment/${post_id}/add`, body, config)
-    return "Comment sent !"
+    const response = await axios.post(`http://localhost:3000/api/comment/${post_id}/add`, body, config)
+    return response.data
+  }catch(err){
+    console.log(err);
+    return err.response.data;
+  }
+}
+
+export async function deleteComment(comment_id){
+  const auth = authHeader();
+  const config = {
+    headers : auth ,
+  };
+  try{
+    const response = await axios.delete(`http://localhost:3000/api/comment/${comment_id}`, config)
+    return response.data
   }catch(err){
     console.log(err);
     return err.response.data;
@@ -356,6 +398,21 @@ export async function globalSearch(termSearch){
   };
   try{
     const response = await axios.post('http://localhost:3000/api/search',body, config);
+    console.log(response.data)
+    return response.data;
+  }catch(err){
+    console.log(err)
+    return err.response.data;
+  }
+}
+
+export async function foundAllUserPosts(user_id){
+  const auth = authHeader();
+  const config = {
+    headers : auth ,
+  };
+  try{
+    const response = await axios.get(`http://localhost:3000/api/post/search/${user_id}`, config);
     console.log(response.data)
     return response.data;
   }catch(err){

@@ -8,12 +8,6 @@ import { sendMessageToApi } from '../../../services/callApi'
 // FONCTION //
 //***********//
 
-async function sendMessage(user_id, e){  // ATTENTION LE PREVENT DEFAULT MARCHE PAS !
-  e.preventDefault();
-  const content = document.getElementsByClassName('message__content')[0].value;
-  const response = await sendMessageToApi(user_id, content);
-  console.log(response)
-};
 
 //***********//
 // COMPOSANT //
@@ -40,6 +34,14 @@ function NewMessage(props){
     console.log(userSearch)
     return;
   }
+
+  async function sendMessage(user_id, e){  // ATTENTION LE PREVENT DEFAULT MARCHE PAS !
+    e.preventDefault();
+    const content = document.getElementsByClassName('message__content')[0].value;
+    const response = await sendMessageToApi(user_id, content);
+    console.log(response)
+  };
+  
 
   function selectedUser(user){
     setUserFound(userFound)

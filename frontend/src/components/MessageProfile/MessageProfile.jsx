@@ -24,7 +24,7 @@ function MessageProfile(){
 //***********//
   return(
     <section id="message-profile">
-        <p class="section-title border-bottom"> The last messages </p>
+        <p class="section-title border-bottom"> Latest messages </p>
       {lastMessages?.length === 0 ? 
         <div>
           <p>You didn't sent or received any message !</p>

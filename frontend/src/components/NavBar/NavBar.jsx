@@ -18,6 +18,10 @@ function NavBar() {
     console.log(searchValue)
     navigate(`/search/${searchValue}`)
   }
+  function logout(){
+    localStorage.clear();
+    navigate('/login');
+  }
   return (
     <div>
       <header>
@@ -31,7 +35,7 @@ function NavBar() {
             <FontAwesomeIcon className='search-icone' icon={ faMagnifyingGlass } />
           </form>
         </div>
-        <button id="logout"  aria-label='login/logout'>
+        <button onClick={logout} id="logout"  aria-label='login/logout'>
          <FontAwesomeIcon icon={ faPowerOff } />
         </button>
       </header>

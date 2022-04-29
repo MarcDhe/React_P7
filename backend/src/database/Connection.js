@@ -16,10 +16,10 @@ sequelize.authenticate()
 })
 
 
-// sequelize.sync({ force: false })  // FORCE A CREER LES TABLES SI ELLES NE LE SONT PAS 
-// .then(() => {                       // probleme crée automatiquement createdAT et updateAt meme sur le user
-//     console.log('yes re-sync done!')
-// })
+sequelize.sync({ force: false })  // FORCE A CREER LES TABLES SI ELLES NE LE SONT PAS 
+.then(() => {                       // probleme crée automatiquement createdAT et updateAt meme sur le user
+    console.log('yes re-sync done!')
+})
 
 module.exports = sequelize;
 global.sequelize = sequelize; // mis en global pour ne pas avoir a le declarer systematiqeuement

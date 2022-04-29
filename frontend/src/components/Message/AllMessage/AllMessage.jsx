@@ -2,10 +2,10 @@ import './style.scss';
 import { useEffect, useState } from 'react';
 import { getAllMessages } from '../../../services/callApi';
 import { useNavigate } from 'react-router-dom';
-import {setDate} from "../../../services/Date"; 
+import { setDate } from "../../../services/Date"; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFeatherPointed } from '@fortawesome/free-solid-svg-icons';
-import { useOutletContext } from "react-router-dom";
+
 
 function AllMessage(){
   let [messages, setMessages] = useState([]); 
@@ -51,7 +51,7 @@ function AllMessage(){
               </figure>
               <div className='message__details'>
               <p className="message__username">{message.username}</p> 
-              <p className='message__createdat'>dernier message il y a {setDate(message.createdAt)}</p>
+              <p className='message__createdat'>last message {setDate(message.createdAt)} ago</p>
               </div>
             </div>
             {!message.not_read > 0  ? null :

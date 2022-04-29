@@ -1,8 +1,8 @@
 import './style.scss';
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { selectAllPost, selectUser } from '../../utils/selectors'
-import { getAllPost, addLikeToApi, unLikeToApi } from '../../services/callApi'
+import { selectAllPost, selectUser } from '../../utils/selectors';
+import { getAllPost, addLikeToApi, unLikeToApi } from '../../services/callApi';
 import { useEffect, useState } from 'react';
 import store from '../../utils/store';
 import Post from '../../components/Post/Post'
@@ -24,6 +24,7 @@ function Home() {
   let [userLiked, setUserLiked] = useState([]); 
   let [writeComment, setWriteComment] = useState(null);
   let [commentStatus, setCommentStatus] = useState(null);
+  let [errMessage, setErrMessage] = useState(null);
   let [resMessage, setResMessage] = useState();
   const user = useSelector(selectUser);
   const allPost = useSelector(selectAllPost);
@@ -31,14 +32,27 @@ function Home() {
   console.log('store init ',store);
 
   
+  // async function setData(){
+  //   await getAllPost(store);
+  //   console.log('test')
+  // //   console.log('ok')
+  // //   console.log('==== ',allPost);
+  // //   addPostLike();
+  // //   console.log('apres init');
+  // //   console.log(userLiked)
+  // console.log('/.//')
+  // }
+  // setData();
   useEffect(()=> {
-    async function setData(callback){
+    async function setData(){
       await getAllPost(store);
       console.log('ok')
       console.log('==== ',allPost);
-      callback();
+      addPostLike();
+      console.log('apres init');
+      console.log(userLiked)
     }
-    setData(addPostLike);
+    setData();
 
     console.log('premier lieu ',allPost);
  
@@ -63,15 +77,7 @@ function Home() {
     }
   }
 
-  function showCommentSection(post_id){
-    return setWriteComment(post_id);
-  }
-  function cancelCommentary(){
-    return setWriteComment(null);
-  }
-
-
-  
+ 
   //TEST LIKE
   function testLike(post_id){
      console.log(userLiked.includes(post_id),'sur le post', post_id) // true or false
@@ -102,17 +108,27 @@ function Home() {
 
   }
 
+  // MONTRE LA PARTIE COMMENTAIRE
+  function showCommentSection(post_id){
+    return setWriteComment(post_id);
+  }
+  //ANNULE LA PARTIE COMMENTAIRE
+  function cancelCommentary(){
+    return setWriteComment(null);
+  }
 
-async function sendComment(post_id,e){
-  e.preventDefault();
-  const commentContent = document.getElementById("comment__content").value;
-  const response = await newComment(post_id, commentContent);
-  console.log(response)
-  setResMessage(response);
-  setWriteComment(null);
-  setCommentStatus(post_id)
-  // on veut que la response soit set sur CommentStatus en attente mentorat
-}
+  async function sendComment(post_id,e){
+    e.preventDefault();
+    const commentContent = document.getElementById("comment__content").value;
+    const response = await newComment(post_id, commentContent);
+    setCommentStatus(post_id);
+    setWriteComment(null)
+    if(response.error){
+      return setErrMessage('An error as occrued')
+    }
+    console.log(response)
+    return setResMessage('Comment sent!');
+  }
 
   function printUserLiked(){
     console.log(userLiked)
@@ -120,7 +136,9 @@ async function sendComment(post_id,e){
 
   return ( 
     <main id='home'>
+      <button onClick={addPostLike}>initialisé le tableau </button>
       <button onClick={printUserLiked}>affichez useRLiked</button>
+      <p>res:{resMessage}, err:{errMessage}, status: {commentStatus}</p>
       <h1>Home</h1>
       <div className="move-to-post">
       <div className="user">
@@ -139,16 +157,6 @@ async function sendComment(post_id,e){
       allPost.data.map((post)=>( // ATTENTION ICI CAR TOUJOURS PAS LOAD 
         <div>
           <Post post={post} />
-        {/* NE MARCHE PAS A CAUSE DU TABLEAU undefined */}
-          {/* { testLike(userLiked, post.id) ? 
-            <p onClick={ unLike } className='unlike'>
-              <FontAwesomeIcon icon={ faHandHoldingHeart } />
-            </p>
-             : 
-             <p onClick={ Like } className='like'>
-             <FontAwesomeIcon icon={ faHandHoldingHeart } />
-             </p>
-          } */}
           <div className='post__action'>
             { testLike(post.id) ? 
             <p className='unlike' onClick={()=> unLike(post)}>
@@ -161,9 +169,9 @@ async function sendComment(post_id,e){
               &nbsp;Like: ({post.Liked?.length})
             </p>
             }
-          <p onClick={()=> showCommentSection(post.id) }>
+          <p onClick={()=> showCommentSection(post.id)} className='commentary'>
             <FontAwesomeIcon icon={ faCommentDots } /> 
-            &nbsp;Commenter 
+            &nbsp;Comment
 
           </p>
           </div>
