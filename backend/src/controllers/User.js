@@ -13,18 +13,18 @@ exports.signUp = (req, res, next) => {
   let regName = new RegExp('^[a-zA-Z\-]+$') // DEBUT FINI PAR LETTRE AVEC POSSIBILITE -
   let regUsername = new RegExp('^[a-zA-Z0-9]+$') // CHIFFRE OU LETTRE 
   if(!regUsername.test(req.body.username) || req.body.username.length < 4 ){
-    return res.status(400).json({ error : 'Username : 4 Charactères requis !'})
+    return res.status(400).json({ error : 'Username : 4 characters required !'})
   }
   if(!regName.test(req.body.lastname) || req.body.lastname == ''){
-    return res.status(400).json({ error : 'Nom de famille incorrect !'})
+    return res.status(400).json({ error : 'LastName incorrect !'})
   }
   if(!regName.test(req.body.firstname) || req.body.firstname == ''){
-    return res.status(400).json({ error : 'Prénom incorrect !'})
+    return res.status(400).json({ error : 'Firstname incorrect !'})
   } 
   User.findOne({where: {username: req.body.username}})
     .then(user => {
     if(user){
-      return res.status(400).json({ error: 'Username déjà utilisé !'})
+      return res.status(400).json({ error: 'Username already exist !'})
     }
   bcrypt.hash(req.body.passwd, 10) // renvoi une promesse
     .then(hash=> {
@@ -35,7 +35,7 @@ exports.signUp = (req, res, next) => {
         passwd: hash,
       });
       user.save()
-        .then(() => res.status(201).json({ message : 'Utilisateur crée !'}))
+        .then(() => res.status(201).json({ message : 'User created !'}))
         .catch(error => res.status(400).json({ error }));
     })
   })
@@ -48,12 +48,12 @@ exports.login = (req, res, next) => {
   User.findOne({where: {username: req.body.username}}) // ATTENTION ICI UTILISATION DU WHERE !NOSQL
     .then(user => {
       if(!user){
-        return res.status(401).json({ error : 'Utilisateur non trouvé !'});
+        return res.status(401).json({ error : "User didn't exist !"});
       }
       bcrypt.compare(req.body.passwd, user.passwd)
         .then(valid => {
           if(!valid){
-            return res.status(401).json({ error : 'Mot de passe incorect !'});
+            return res.status(401).json({ error : 'Password incorrect !'});
           }
           res.status(200).json({
             id : user.id,
@@ -90,7 +90,7 @@ exports.updateAvatar = (req, res, next ) => {
   User.findOne({where:{id : req.auth.userId}})
   .then((user) => {
     if(!user){
-      return res.status(404).json({ error: "Utilisateur inexistant !"})
+      return res.status(404).json({ error: "User didn't exist !"})
     } 
     // passage du userId dans le req.auth donc automatiquement le proprietaire
     const userNewAvatar = { avatar: `${req.protocol}://${req.get('host')}/pictures/avatars/${req.file.filename}`}
@@ -113,21 +113,21 @@ exports.changePassword = (req, res, next) => {
   User.findOne({where:{id : req.auth.userId}})
   .then((user) => {
     if(!user){
-      return res.status(404).json({ error: "Utilisateur inexistant !"})
+      return res.status(404).json({ error: "User didn't exist !"})
     }
     if(req.body.passwd !== req.body.newPasswordCheck){
-      return res.status(400).json({ error: "Nouveau mot de passe incorrecte !"})
+      return res.status(400).json({ error: "New password incorrect !"})
     }
     bcrypt.compare(req.body.currentPassword, user.passwd)
         .then(valid => {
           if(!valid){
-            return res.status(401).json({ error : 'Mot de passe incorect !'});
+            return res.status(401).json({ error : 'Password incorrect!'});
           }
           bcrypt.hash(req.body.passwd, 10) // renvoi une promesse
           .then(hash=> {
             const userPassword = { passwd: hash };
             user.update(userPassword)
-              .then(() => res.status(200).json({ message: 'Mot de passe modifié !'}))
+              .then(() => res.status(200).json({ message: 'Password mdofied !'}))
               .catch( error => res.status(400).json({ error })); 
           })
           .catch( error => res.status(500).json({ error }));
@@ -141,7 +141,7 @@ exports.deleteUser = (req, res, next) => {
   User.findOne({where:{id : req.auth.userId}})
     .then((user) => {
       if(!user){
-        return res.status(404).json({ error: "Utilisateur inexistant !"});
+        return res.status(404).json({ error: "User didn't exist !"});
       };
       if(user.avatar !== `http://localhost:3000/pictures/avatars/default_avatar.png`){
         const filename = user.avatar.split('/pictures/avatars/')[1]; // recup du nom du fichier pour le supprimé
@@ -150,7 +150,7 @@ exports.deleteUser = (req, res, next) => {
         });
       }
       user.destroy()
-        .then(() => res.status(200).json({ message: 'Utilisateur supprimé !'}))
+        .then(() => res.status(200).json({ message: 'User deleted !'}))
         .catch(error => res.status(400).json({ error }))
     })
     .catch(error => res.status(400).json({ error }))
@@ -161,7 +161,7 @@ exports.toUserMessage = (req, res, next ) => {
   User.findAll({where : {username : {[Op.like]:`${req.body.username}%`}}}) // SOURCE https://sequelize.org/master/manual/model-querying-basics.html
     .then((users) => {
       if(!users[0]){ // CAR FINDALL RENVOI UN TABLEAU
-        return res.status(404).json({ error : 'Aucun Utilisateur trouvé !'});
+        return res.status(404).json({ error : 'No user found !'});
       }
       const userArray = [];
       for(let i in users){

@@ -10,8 +10,24 @@ module.exports = {
         autoIncrement: true,
         primaryKey : true
       },
-      from_id: { type: Sequelize.INTEGER(11), allowNull: false},
-      to_id: { type: Sequelize.INTEGER(11), allowNull: false},
+      from_id: { 
+        type: Sequelize.INTEGER(11),
+         allowNull: false,
+         onDelete: 'CASCADE',
+         references: {
+           model: 'User',
+           as: 'from_id'
+         }
+        },
+      to_id: { 
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'User',
+          as: 'from_id'
+        }
+      },
       content:{ type: Sequelize.STRING(300), required: true},
       createdAt: Sequelize.DATE,
       readedAt: Sequelize.DATE,

@@ -60,8 +60,8 @@ function Login() {
     <div className='login'>
       <h1>Connect to your account</h1>
       <form>
-        <TextField  id="username" label="Username" variant="outlined" required/>
-        <TextField  id="password" label="password" variant="outlined" type='password' required/>
+        <TextField  id="username" label="Username" variant="outlined" required className='margin-bottom'/>
+        <TextField  id="password" label="password" variant="outlined" type='password' required className='margin-bottom'/>
         <button onClick={log}>Login</button> 
         {error === true ? <span className='red-text'>Username/Password incorrect</span> : null}
       </form>

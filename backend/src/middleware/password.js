@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
   console.log(req.body.passwd)
   if( !passwordRulesSchema.validate(req.body.passwd) ){
     console.log('password rules not respect :', passwordRulesSchema.validate(`${req.body.password}`, { list: true }))
-    return res.status(406).json({ error : ' Doit contenir au minimum 6 caractères dont 1 majuscule !'})
+    return res.status(406).json({ error : ' Should have 6 characters and 1 uppercase !'})
   }else{
     next();
   }

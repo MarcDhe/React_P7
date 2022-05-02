@@ -89,8 +89,11 @@ function EditProfile (){
     const currentPassword = document.getElementById('current-password').value ;
     const passwd = document.getElementById('new-password').value; // Format pôur le faire passé dans password validator 
     const newPasswordCheck = document.getElementById('new-password-check').value;
-    let response = await changePassword(currentPassword, passwd, newPasswordCheck);
-
+    const response = await changePassword(currentPassword, passwd, newPasswordCheck);
+    if(response.error){
+      return setAlertMessage(response.error)
+    }
+    return setAlertMessage(response.message)
   }
   //***********//
 // RETURN HTML //

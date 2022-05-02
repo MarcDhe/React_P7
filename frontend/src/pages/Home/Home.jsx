@@ -182,13 +182,13 @@ function Home() {
               &nbsp;Like: ({post.Liked?.length})
             </p>
             : 
-            <p className='like' onClick={() => addLike(post, index)}>pas de like
+            <p className='like' onClick={() => addLike(post, index)}>
               <FontAwesomeIcon icon={ faHandHoldingHeart } className='red-color' />
               &nbsp;Like: ({post.Liked?.length})
             </p>
             }
-          <p onClick={()=> showCommentSection(post.id)} className='commentary'>
-            <FontAwesomeIcon icon={ faCommentDots } /> 
+          <p onClick={()=> showCommentSection(post.id)} className='commentary '>
+            <FontAwesomeIcon icon={ faCommentDots } className='red-color'/> 
             &nbsp;Comment
 
           </p>

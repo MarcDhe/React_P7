@@ -55,7 +55,7 @@ function AllMessage(){
               </div>
             </div>
             {!message.not_read > 0  ? null :
-            <p className='message__nor-read'>{message.not_read}</p>
+            <p className='message__not-read'>{message.not_read}</p>
             }
           </div>
         </li>

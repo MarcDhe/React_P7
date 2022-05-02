@@ -51,10 +51,10 @@ function SignUp() {
       <div className='login'>
         <h1>SignUp</h1>
         <form onSubmit={sign} >
-        <TextField id="username" label="Username" variant="outlined" required />
-        <TextField id="lastname" label="lastname" variant="outlined" required />
-        <TextField id="firstname" label="firstname" variant="outlined" required />
-        <TextField id="password" label="password" variant="outlined" type='password' required />
+        <TextField id="username" label="Username" variant="outlined" required className='margin-bottom'/>
+        <TextField id="lastname" label="lastname" variant="outlined" required className='margin-bottom'/>
+        <TextField id="firstname" label="firstname" variant="outlined" required className='margin-bottom'/>
+        <TextField id="password" label="password" variant="outlined" type='password' required className='margin-bottom'/>
         {error !== null ? <span className="red-text">{ error }</span> : null}
         <button>Singup Now</button>
         </form>
