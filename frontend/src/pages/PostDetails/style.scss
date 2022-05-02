@@ -1,13 +1,14 @@
-#alert{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+.green-background{
   margin-right:5px;
   margin-left: 5px;
-  padding-right:5px;
-  padding-left: 5px;
-   background-color: #D4ECD9;
+  padding: 15px 5px 15px 5px;
+  background-color: #D4ECD9;
+}
+.red-background{
+  margin-right:5px;
+  margin-left: 5px;
+  padding: 15px 5px 15px 5px;
+  background-color: #F9D6D9;
 }
 
 #one-post{

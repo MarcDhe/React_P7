@@ -1,5 +1,5 @@
 import './style.scss';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { selectAllPost, selectUser } from '../../utils/selectors';
 import { getAllPost, addLikeToApi, unLikeToApi } from '../../services/callApi';
@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingHeart, faCommentDots }  from '@fortawesome/free-solid-svg-icons'
 import { newComment } from '../../services/callApi';
 import produce from 'immer';
+import { checkLocalStorage } from '../../services/localStorage';
+
 
 
 //***********//
@@ -28,6 +30,7 @@ function Home() {
   let [resMessage, setResMessage] = useState();
   const user = useSelector(selectUser);
   const allPost = useSelector(selectAllPost);
+  const navigate = useNavigate();
   console.log(allPost.data);
   console.log('store init ',store);
 
@@ -42,7 +45,12 @@ function Home() {
   // //   console.log(userLiked)
   // console.log('/.//')
   // }
-  // setData();
+  // setData()
+
+
+  //VERIFICATION DU LOCALSTORAGE
+  checkLocalStorage(navigate);
+
   useEffect(()=> {
     async function setData(){
       await getAllPost(store);
@@ -53,28 +61,23 @@ function Home() {
       console.log(userLiked)
     }
     setData();
-
     console.log('premier lieu ',allPost);
  
   },[]) // DEPENDANCE ALLPOST IMPORTANT CAR AU D2BUT PROMISE
  
   //AJOUT LES POST LIKE AU TABLEAU USERLIKED POUR CONNAITRE LES POSTS LIKE 
   function addPostLike(){
-    const posts = allPost.data 
+    const posts = allPost?.data;
+    let newArray = [];
     for(let i in posts){ // ATTENTION ICI NE MARCHE PAS CAR NOUSN N4AVONS PAS ENCORE LE RETOUR DE ALLPOST.DATA 
       for(let y in posts[i].Liked){
-        console.log("longueur tableau Liked", posts[i].Liked.length)
         if(posts[i].Liked[y].user_id === user.id){
-          if(posts[i].Liked?.length === 0){
-            setUserLiked(posts[i].id)
-          }else{
-          console.log('++++',posts[i])
-          setUserLiked(oldArray => [...oldArray, posts[i].id])
-          console.log("tableau like", userLiked)
-          }
+          newArray.push(posts[i].id)
         }
       }
     }
+    setUserLiked(newArray)
+    console.log('le tableau des like', userLiked)
   }
 
  
@@ -90,11 +93,10 @@ function Home() {
     if(response.error){
       return;
     }
-    console.log("avant", userLiked)
-    setUserLiked( oldArray => [...oldArray, post.id]) // https://prograide.com/pregunta/74951/methode-push-dans-react-hooks-usestate
-    console.log('Apres', userLiked)
-    post.Liked.length++;
-
+   const copyUserliked = produce(userLiked, draft =>{
+     draft.push(post.id)
+   })
+   setUserLiked(copyUserliked)
   }
 
   // RETIRE UN LIKE 
@@ -103,9 +105,14 @@ function Home() {
     if(response.error){
       return;
     }
+    // ATTENTION ICI PAS DE RAFRAICHISSEMENT AU CHAZNGEMENT DE USERLIKED
+    // const copyUserliked = produce(userLiked, draft =>{
+    //   draft.filter(item => item !== post.id)
+    // })
+    // console.log('le ubliek coopy', copyUserliked)
+    // setUserLiked(copyUserliked);
+    
     setUserLiked(userLiked.filter(item => item !== post.id))
-    console.log('////////////',userLiked)
-
   }
 
   // MONTRE LA PARTIE COMMENTAIRE
@@ -139,6 +146,7 @@ function Home() {
       <button onClick={addPostLike}>initialisé le tableau </button>
       <button onClick={printUserLiked}>affichez useRLiked</button>
       <p>res:{resMessage}, err:{errMessage}, status: {commentStatus}</p>
+      <p>{JSON.stringify(userLiked)}</p>
       <h1>Home</h1>
       <div className="move-to-post">
       <div className="user">

@@ -266,7 +266,7 @@ export async function newComment(post_id, content){
     return err.response.data;
   }
 }
-
+// SUPPRESSION COMMENTAIRE
 export async function deleteComment(comment_id){
   const auth = authHeader();
   const config = {
@@ -274,6 +274,21 @@ export async function deleteComment(comment_id){
   };
   try{
     const response = await axios.delete(`http://localhost:3000/api/comment/${comment_id}`, config)
+    return response.data
+  }catch(err){
+    console.log(err);
+    return err.response.data;
+  }
+}
+//UPDATE COMMENTAIRE
+export async function updateComment(comment_id, content){
+  const auth = authHeader();
+  const config = {
+    headers : auth ,
+  };
+  const body = { content };
+  try{
+    const response = await axios.post(`http://localhost:3000/api/comment/${comment_id}/update`,body , config)
     return response.data
   }catch(err){
     console.log(err);
