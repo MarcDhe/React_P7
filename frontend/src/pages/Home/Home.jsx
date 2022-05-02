@@ -1,16 +1,19 @@
 import './style.scss';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { selectAllPost, selectUser } from '../../utils/selectors';
 import { getAllPost, addLikeToApi, unLikeToApi } from '../../services/callApi';
 import { useEffect, useState } from 'react';
 import store from '../../utils/store';
+import { selectAllPost, selectUser } from '../../utils/selectors';
+import { allPostUpdateLike } from '../../features/post';
 import Post from '../../components/Post/Post'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingHeart, faCommentDots }  from '@fortawesome/free-solid-svg-icons'
 import { newComment } from '../../services/callApi';
 import produce from 'immer';
 import { checkLocalStorage } from '../../services/localStorage';
+
+
 
 
 
@@ -33,19 +36,6 @@ function Home() {
   const navigate = useNavigate();
   console.log(allPost.data);
   console.log('store init ',store);
-
-  
-  // async function setData(){
-  //   await getAllPost(store);
-  //   console.log('test')
-  // //   console.log('ok')
-  // //   console.log('==== ',allPost);
-  // //   addPostLike();
-  // //   console.log('apres init');
-  // //   console.log(userLiked)
-  // console.log('/.//')
-  // }
-  // setData()
 
 
   //VERIFICATION DU LOCALSTORAGE
@@ -88,7 +78,7 @@ function Home() {
   }
 
   //AJOUT D'UN LIKE 
-  async function addLike(post){
+  async function addLike(post, index){
     const response  = await addLikeToApi(post.id)
     if(response.error){
       return;
@@ -96,11 +86,24 @@ function Home() {
    const copyUserliked = produce(userLiked, draft =>{
      draft.push(post.id)
    })
-   setUserLiked(copyUserliked)
+   setUserLiked(copyUserliked);
+
+   // ESSAI MODIF REDUX;
+   const status = selectAllPost(store.getState()).status
+   if(status=== "pending" || status === "updating"){
+     return;
+   }
+    const payload= { 
+      post_id: post.id,
+      user_id: user.id,
+      index,
+      like :1 
+    }
+    store.dispatch(allPostUpdateLike(payload));
   }
 
   // RETIRE UN LIKE 
-  async function unLike(post){ // ATTENTION ICI RETIRE LE USERLIKED PROPREMENT 
+  async function unLike(post, index){ // ATTENTION ICI RETIRE LE USERLIKED PROPREMENT 
     const response  = await unLikeToApi(post.id)
     if(response.error){
       return;
@@ -111,8 +114,15 @@ function Home() {
     // })
     // console.log('le ubliek coopy', copyUserliked)
     // setUserLiked(copyUserliked);
-    
+    console.log('index est ', index)
     setUserLiked(userLiked.filter(item => item !== post.id))
+    const payload= { 
+      post_id: post.id,
+      user_id: user.id,
+      index,
+      like : -1 
+    }
+    store.dispatch(allPostUpdateLike(payload));
   }
 
   // MONTRE LA PARTIE COMMENTAIRE
@@ -162,17 +172,17 @@ function Home() {
         <p>{post}</p>
       ))} */}
     {allPost.data !== null ?  
-      allPost.data.map((post)=>( // ATTENTION ICI CAR TOUJOURS PAS LOAD 
+      allPost.data.map((post, index)=>( // ATTENTION ICI CAR TOUJOURS PAS LOAD 
         <div>
           <Post post={post} />
           <div className='post__action'>
             { testLike(post.id) ? 
-            <p className='unlike' onClick={()=> unLike(post)}>
+            <p className='unlike' onClick={()=> unLike(post, index)}>
               <FontAwesomeIcon icon={ faHandHoldingHeart } className='red-color' />
               &nbsp;Like: ({post.Liked?.length})
             </p>
             : 
-            <p className='like' onClick={() => addLike(post)}>pas de like
+            <p className='like' onClick={() => addLike(post, index)}>pas de like
               <FontAwesomeIcon icon={ faHandHoldingHeart } className='red-color' />
               &nbsp;Like: ({post.Liked?.length})
             </p>
