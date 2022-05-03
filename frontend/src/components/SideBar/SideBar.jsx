@@ -7,7 +7,6 @@ import {faUser, faHouseChimneyWindow, faEnvelope, } from '@fortawesome/free-soli
 
 function SideBar() {
   return (
-    <div>
       <nav id='nav__inside'>
         <Link className="nav__link mobile-off" to="/">
           <h2><FontAwesomeIcon icon={faHouseChimneyWindow} /> Home</h2>
@@ -34,7 +33,6 @@ function SideBar() {
           <h2>Post</h2>
         </Link>
       </nav>
-    </div>
   );
 }
 

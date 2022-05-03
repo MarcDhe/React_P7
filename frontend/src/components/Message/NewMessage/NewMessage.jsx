@@ -4,14 +4,6 @@ import { searchUsername } from '../../../services/callApi'
 import { useNavigate } from 'react-router-dom';
 import { sendMessageToApi } from '../../../services/callApi'
 
-//***********//
-// FONCTION //
-//***********//
-
-
-//***********//
-// COMPOSANT //
-//***********//
 
 function NewMessage(props){
   let [userSearch, setUserSearch] = useState([]);
@@ -19,6 +11,7 @@ function NewMessage(props){
   let [alertMessage, setAlertMessage] = useState(null); 
   const navigate = useNavigate();
 
+  //GERE LA RECHERCHE D UN USER 
   async function manageSearchUsername(){
     const tryUsername = document.getElementById('username').value;
     if(tryUsername.length === 0){
@@ -34,7 +27,7 @@ function NewMessage(props){
     console.log(userSearch)
     return;
   }
-
+  //ENVOI UN MESSAGE
   async function sendMessage(user_id, e){  // ATTENTION LE PREVENT DEFAULT MARCHE PAS !
     e.preventDefault();
     const content = document.getElementsByClassName('message__content')[0].value;
@@ -42,13 +35,14 @@ function NewMessage(props){
     console.log(response)
   };
   
-
+  //SELECTION UN USER QUI SERA LE DESTINATAIRE
   function selectedUser(user){
     setUserFound(userFound)
     document.getElementById('username').value= user.username // latence donc on n'utilise pas de suite userFound car non déf
     document.getElementsByClassName('message__content')[0].focus(); // met le focus sur l'element
     setUserSearch([]); // ne pas oublié pour enlever l aprécédente recherche du html
   }
+  //RETOUR MENU MAIN MESSAGE
   function backToMessagingMenu(navigate){ // ATTENTION ICI MARCHE BIZZAREMENT
     navigate('/messaging')
   };

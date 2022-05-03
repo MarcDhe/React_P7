@@ -43,12 +43,15 @@
   #nav__inside{
     height: auto;
     flex-direction: row;
-    justify-content:space-between;
-    align-items: center;
+    height: 100%;
     .mobile-on{
       display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 25%;
       margin: 0px;
+      height: 100%
     }
     .mobile-off{
       display: none;

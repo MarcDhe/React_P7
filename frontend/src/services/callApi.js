@@ -35,11 +35,9 @@ export async function loginTry(username, passwd){
 export async function trySignup(body){
   try{
   const response = await axios.post('http://localhost:3000/api/auth/signup', body);
-  //JE VEUX LA REPONSE DU SEERVEUR EN CLAIRE !
-  console.log('ratata',response.data); // ici est la réponse du serveur res.mesasge
   return response.data;
   } catch(err){
-    console.log("ici",err);
+    console.log(err);
     return err.response.data;
   }
 };

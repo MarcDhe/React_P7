@@ -1,0 +1,14 @@
+#error{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  .frame{
+    border: 1px solid rgb(75, 73, 73);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  img{
+    height: 200px;
+  }
+}

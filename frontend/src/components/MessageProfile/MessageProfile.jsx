@@ -2,15 +2,11 @@ import './style.scss';
 import { useState, useEffect } from 'react';
 import { getLastMessages } from '../../services/callApi'
 
-//***********//
-// COMPOSANT //
-//***********//
+
 function MessageProfile(){
   console.log("haha")
   let [lastMessages, setLastMessages] = useState([]);
-
-  console.log('ici',lastMessages)
-
+  
   useEffect(()=>{
     const fetchLastMesssages = async () => {
       const data = await getLastMessages();
@@ -19,9 +15,7 @@ function MessageProfile(){
     fetchLastMesssages();
   },[])
   
-  //***********//
-// RETURN HTML //
-//***********//
+
   return(
     <section id="message-profile">
         <p class="section-title border-bottom"> Latest messages </p>

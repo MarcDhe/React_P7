@@ -19,7 +19,7 @@ function PostDetails(){
   const params = useParams();
 
   let [onePost, setOnePost]= useState([]);
-  let [alertMessage, setAlertMessage] = useState("tata");
+  let [alertMessage, setAlertMessage] = useState("");
   let [method, setMethod] = useState("read");
   let [commentMethod, setCommentMethod] = useState( {status:"read", comment_id: null, index: null} );
   let [alertComment, setAlertComment] = useState("");
@@ -48,9 +48,6 @@ function PostDetails(){
     return likeStatus
   }
 
-  function showOnePost(){
-    console.log("onePost", onePost)
-  }
   // PRETIRE EL MODE UPDATE
   function cancelUpdate(){
     const copyCommentMethod = produce(commentMethod, draft => {
@@ -212,7 +209,6 @@ function PostDetails(){
   
   return(
     <main id='one-post'>
-      <p>{JSON.stringify(onePost)}</p>
      <div className='post'>
       {method !== "read" ? null :
         <div>
@@ -239,8 +235,8 @@ function PostDetails(){
         {method !== 'update' ? null :
           <form onSubmit={sendUpdatePost}>
             <PostText imageUrl={onePost.imageUrl} title={onePost.title} content={onePost.content} />
-            <button type='submit'>Envoyer</button>
-            <button type="button" onClick={cancelUpdate}>Annuler</button>
+            <button type='submit'>Send</button>
+            <button type="button" onClick={cancelUpdate}>Cancel</button>
           </form>
         }
         <div className='post__add'>
@@ -271,13 +267,13 @@ function PostDetails(){
           <textarea id='new-comment__content'  placeholder='Ecrivez votre commentaire' maxLength="300" required></textarea>
           <div className="new-comment__option">
             {commentMethod.status !== "read" ? null :
-              <button onClick={sendComment}>Envoyez</button>  
+              <button onClick={sendComment}>Send</button>  
             }
             {commentMethod.status !== "update" ? null :
-              <button onClick={cancelUpdate}>Annuler</button> 
+              <button onClick={cancelUpdate}>Cancel</button> 
             }
             {commentMethod.status !== "update" ? null :
-              <button onClick={manageUpdateComment}>Sauvegardez</button>           
+              <button onClick={manageUpdateComment}>Save</button>           
             }       
           </div>
           <p className="alert__text">{ alertComment }</p>

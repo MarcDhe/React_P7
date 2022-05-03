@@ -16,6 +16,7 @@ function StandardSearch(props){
   let [commentResult, setCommentResult] = useState([])
 
   useEffect(()=>{
+    // RECUPERATION APPEL A L'API
     async function getPostsResult(termSearch){
       const response = await globalSearch(termSearch); 
       console.log("retourAPI:", response)
@@ -26,25 +27,28 @@ function StandardSearch(props){
     getPostsResult(params.id);
   }, [params.id])
 
+  // AFFICHE LE CONTNEU DE POST
   function switchToPost(){
     removeBorderBottom();
     setSelect("post");
     const blocActivity = document.getElementsByClassName('select__post')[0];
     blocActivity.classList.add('border-bottom');
   }
+  //AFFICHE LE CONTENU DE COMMENTARY
   function switchToCommentary(){
     removeBorderBottom();
     setSelect("commentary");
     const blocMessage = document.getElementsByClassName('select__commentaire')[0];
     blocMessage.classList.add('border-bottom');
   }
+  //AFFICHE LE CONTENU DE USER
   function switchToUser(){
     removeBorderBottom();
     setSelect("user");
     const blocEdit = document.getElementsByClassName('select__user')[0];
     blocEdit.classList.add('border-bottom');
   }
-
+  // GESTION DE L'APPARENCE DES BORDURES EN FONCTION DE LA SELECTION
   function removeBorderBottom(){
     const blocPost = document.getElementsByClassName('select__post')[0];
     const blocCommentaire = document.getElementsByClassName('select__commentaire')[0];
@@ -53,22 +57,15 @@ function StandardSearch(props){
     blocCommentaire.classList.remove('border-bottom');
     blocUser.classList.remove('border-bottom');
   }
-  function printVar(){
-    console.log("print", userResult, postResult, commentResult)
-  }
-
+  //RENVOI AU COMPOSANT MAIN LES VARIABLES DE LA RECHERCHE DE USER SPECIFIQUE 
   function searchAllUserPost(user_id){
     props.setStatus('userPost');
     props.setUserId(`${user_id}`);
   }
-  function updateStatus(){
-    props.setStatus('userPost');
-  }
 
   return(
   <section id='standard-search'>
-    <button onClick={updateStatus}>update props</button>
-    <button onClick={printVar}>show variabel</button>
+
     <h3 className='border-bottom'>Term Of Search : '{termSearch}'</h3>
     <div className="container">
       <div className='select'>

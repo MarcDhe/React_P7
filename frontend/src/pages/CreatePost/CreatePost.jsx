@@ -21,10 +21,10 @@ function CreatePost (){
   }
   return(
     <main id="create-post">
-      <h1> Créer votre poste  </h1>
+      <h1> Create your post </h1>
       <form onSubmit={sendPost}>
         <PostText/>
-        <button>Poster</button>
+        <button>Post</button>
       </form>
     </main>
   )

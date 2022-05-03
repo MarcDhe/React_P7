@@ -10,21 +10,22 @@ function PostText(props){
     setUrl(imageUrl)
   },[imageUrl])
 
-  function previewFile(e) { // interessant de voir e.target qui est lendroit ou ce declenche levent
+  //PREVUALISATION IMAGE
+  function previewFile(e) { 
     const file = e.target.files[0];
     setUrl(URL.createObjectURL(file));
   };
 
  return(
   <div className='create-post'>
-  <input id='create-post__title' value={title} placeholder='Titre' maxLength="125" required aria-label='title' />
+  <input id='create-post__title' value={title} placeholder='Title' maxLength="125" required aria-label='title' />
     {!url ? null :
       <figure>
         <img src={url} alt='new postPicture'/>
       </figure>
     }
-    <textarea  id='create-post__content' value={content} placeholder='Texte' maxLength="300" required aria-label='content'></textarea>
-    <label for='create-post__file'>Ajouter une image ou une vidéo :</label>
+    <textarea  id='create-post__content' value={content} placeholder='Text' maxLength="300" required aria-label='content'></textarea>
+    <label for='create-post__file'>Add picture or video :</label>
     <input id='create-post__file' type="file" onChange={previewFile} /> 
   </div>
  )

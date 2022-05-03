@@ -29,18 +29,21 @@ function Profile(){
   const navigate = useNavigate();
   const user = useSelector(selectUser);
 
+  //RENVOI VERS COMPOSANT ACTIVITY
   function switchToActivity(){
     removeBorderBottom()
     const blocActivity = document.getElementsByClassName('activity')[0];
     blocActivity.classList.add('border-bottom');
     navigate('/profile/activity');
   }
+  // RENVOI VERS COMPOSANT MESSAGE PROFILE
   function switchToMessage(){
     removeBorderBottom()
     const blocActivity = document.getElementsByClassName('message')[0];
     blocActivity.classList.add('border-bottom');
     navigate('/profile/message');
   }
+  //RENVOI VERS COMPOSANT EDITPROFILE
   function switchToEdit(){
     removeBorderBottom()
     const blocActivity = document.getElementsByClassName('edit')[0];

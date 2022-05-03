@@ -20,12 +20,7 @@ import { useNavigate } from "react-router-dom";
 function SignUp() {
   const [error, setError] = useState(null);
   let navigate = useNavigate();
-  //FAIT CRASH AU CHARGEMENT DE LA PAGE RAJOUT SINITIALISE A 0 ET NE BOUGE PLUS , CE NEST PAS UN POINTEUR ?
-  // const username = document.getElementById('username')?.value;
-  // const lastname = document.getElementById('lastname')?.value;
-  // const firstname = document.getElementById('firstname')?.value;
-  // const passwd = document.getElementById('password')?.value;
-  // const body = { username, lastname, firstname, passwd };
+
 
   async function sign(e){
     e.preventDefault();
@@ -35,12 +30,9 @@ function SignUp() {
     const passwd = document.getElementById('password').value;
     const body = { username, lastname, firstname, passwd };
     const res = await trySignup(body);
-    console.log('la',res)
-    // if(res.error){ // affiche un message d'erreur si error nexiste pas hum .... FAIT CRASH2 LA SUITE A VOIR 
-    //   console.log("craque", res.error)
-    //   setError(res.error)
-    // }
-    console.log("+++++", res);
+    if(res.error){
+      return setError(res.error);
+    }
     const user = await loginTry(username, passwd);
     setLocalStorage(user);
     navigate('/');

@@ -7,9 +7,6 @@ import { selectUser } from '../../../utils/selectors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
-//***********//
-// COMPOSANT //
-//***********//
 
 function Conversation(){
   
@@ -33,13 +30,16 @@ function Conversation(){
     fetchInterlocutor();
   },[limit, params]); // LIMIT EN DEPENDANCE PERMET LE RAFRAICHISSEMENT AUTO A SON CHAGNEMENT 
 
+  //RETOUR AU MAIN MENU MESSAGE
   function backToAllMessages(){
     navigate('/messaging');
   }
+  //AFFICHE PLUS DE MESSAGES
   function showMore(){
     const newLimit = limit + 5;
     setLimit(newLimit)
   }
+  //GERE LENVOI D'UN NOUVEAU MESSAGE
   async function manageSendMessage(to_id, e){
     e.preventDefault();
     let content = document.getElementsByClassName('message__content')[0].value ;

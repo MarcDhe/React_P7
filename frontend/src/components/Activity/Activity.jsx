@@ -38,20 +38,19 @@ function Activity (){
     fetchMyPosts();
     fetchMyLikes();
   },[]); // LIMIT EN DEPENDANCE PERMET LE RAFRAICHISSEMENT AUTO A SON CHAGNEMENT 
-console.log(allPosts)
-//  let data = await myPosts();
-//  setAllPosts(data)
 
   // useEffect(()=> {  // NE JAMAIS FAIRE CA USEEFFECT PAS ASYNC
   //   let data = await myPosts
   // },[])
 
+  //AFFICHAGE CONTENU MY POST
   function selectPost(){
     removeBorderBottom();
     const blocPost = document.getElementsByClassName('select-post')[0];
     blocPost.classList.add('border-bottom');  
     setSelect('post');
   };
+  //AFFICHAGE CONTENU MYLIKES
   function selectLiked(){
     removeBorderBottom();
     const blocLiked = document.getElementsByClassName('select-liked')[0];
@@ -74,7 +73,7 @@ console.log(allPosts)
               </div>
               :
               allPosts.map((post) => 
-                // on n'importe pas post car nous ne voulons pas du cadres de l'utilisateur
+                // on n'importe pas le composant  post car nous ne voulons pas du cadres de l'utilisateur
                 <article className='post'>
                 <Link to={`/post/${post.id}`} className='unlink'> 
                   <div className="post__info">

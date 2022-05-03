@@ -7,17 +7,16 @@ import { useNavigate } from 'react-router-dom';
 
 function NavBar() {
   const navigate = useNavigate();
-  // const history = useHistory();
-  // const log = () => {
-  //   console.log('tata')
-  //   history.push('/login')
-  // }
+  // const history = useHistory(); ALERNATIVE PLUS ANCIENNE
+
+  /// NOUS RENVOI VERS LA PAGE RECHERCHE
   function goToSearch(e){
     e.preventDefault()
     const searchValue = document.getElementById('search__bar').value;
     console.log(searchValue)
     navigate(`/search/${searchValue}`)
   }
+  //DECONNECTE L'UTILISATEUR 
   function logout(){
     localStorage.clear();
     navigate('/login');

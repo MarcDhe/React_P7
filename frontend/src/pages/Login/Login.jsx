@@ -39,9 +39,7 @@ function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
-
-  // OOBLIGER DE METTRE LA FONCTION ICI A CAUSE DU
-  async function log(e){ // COMMENT PASSER DES PARAMETRE DANS UN ONCLIK COMME FAIS SUR VUE onClick={log(username)}
+  async function log(e){ 
     e.preventDefault()
     const username = document.getElementById('username')?.value; 
     const passwd = document.getElementById('password')?.value;

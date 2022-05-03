@@ -33,8 +33,7 @@ function EditProfile (){
   const navigate = useNavigate();
   const dispatch = useDispatch()
 
-  console.log("ra",select);
-
+  //AFFICHE LA PARTIE EDIT AVATAR
   function selectEditAvatar(){
     removeBorderBottom()
     const blocPassword = document.getElementsByClassName('select-avatar')[0];
@@ -43,6 +42,7 @@ function EditProfile (){
     console.log('avatar? =>', select);
 
   }
+  // AFFICHE LA PARTIE DELETE USER
   function selectEditDelete(){
     removeBorderBottom()
     const blocPassword = document.getElementsByClassName('select-delete')[0];
@@ -51,6 +51,7 @@ function EditProfile (){
     console.log('delete? =>', select);
 
   }
+  //AFFICHE LA PARTIE EDIT PASSWORD
   function selectEditPassword(){
     removeBorderBottom()
     const blocPassword = document.getElementsByClassName('select-password')[0];
@@ -58,12 +59,12 @@ function EditProfile (){
     setSelect("password");
     console.log('password? =>', select);
   }
-
+  //PERMET DE PREVIEW LIMAGE UPLOAD
   function previewFile(e) { // interessant de voir e.target qui est lendroit ou ce declenche levent
     const file = e.target.files[0];
     setUrl(URL.createObjectURL(file));
   }
-
+  //SUPPRIME LE COMPTE
   function deleteAccount (){
     const answer = window.confirm("Are you sure to delete your account ? \n(All yours informations gonna be loose)")
     if(answer === false){
@@ -73,17 +74,17 @@ function EditProfile (){
     localStorage.clear(user);
     navigate('/login');
   }
-  
- async function changeAvatar(e){
-   e.preventDefault();
-  const fileInput = document.getElementById('new-avatar');
-  const avatarRefresh = await updateAvatar(fileInput.files[0]);
-  const userUpdate = {...user, avatar: avatarRefresh.avatar};
-  dispatch(userUpdating(userUpdate))
-  localStorage.setItem('user', JSON.stringify(userUpdate));
-  // localStorage.setItem('user', JSON.stringify(user));  // PROBLEME LATENCE
+  //CHANGE L'AVATAR
+  async function changeAvatar(e){
+    e.preventDefault();
+    const fileInput = document.getElementById('new-avatar');
+    const avatarRefresh = await updateAvatar(fileInput.files[0]);
+    const userUpdate = {...user, avatar: avatarRefresh.avatar};
+    dispatch(userUpdating(userUpdate))
+    localStorage.setItem('user', JSON.stringify(userUpdate));
+    // localStorage.setItem('user', JSON.stringify(user));  // PROBLEME LATENCE
   }
-
+  // ENVOI ET MODIFICATION DU PASSWORD
   async function sendNewPassword(e){
     e.preventDefault();
     const currentPassword = document.getElementById('current-password').value ;

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Post, {} from '../Post/Post';
 
 function UserSearch(props){
+
   const user_id = props.userId;
   let [allPostsFound, setAllPostsFound] = useState([]);
   useEffect(()=>{
@@ -14,7 +15,8 @@ function UserSearch(props){
       console.log(response)
     }
     oneUserPosts();
-  },[])
+  },[user_id])
+
   return (
     <div>
       {allPostsFound.length === 0 ?
@@ -24,7 +26,6 @@ function UserSearch(props){
           <Post post={post}/>
         ))
       }
-    <p>tata</p>
     </div>
   )
 }

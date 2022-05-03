@@ -19,10 +19,11 @@ function AllMessage(){
     }
     fetchMessages();
   }, [])
-
+  // RENVOI VERS UNE CONVERSATION AVEC UN USER PARTICULIER
   function  sendToConversation(message){
     navigate(`/messaging/user/${message.user_id}`)
   }
+  // RENVOI VERS LE COMPOSANT NEWMESSAGE
   function showNewMessage(){
     navigate("/messaging/newMessage");
   }
